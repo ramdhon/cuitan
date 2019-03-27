@@ -3,7 +3,7 @@ const router = express.Router();
 const {User, Cuit, Comment} = require('../models');
 
 router.get('/', (req, res)=>{
-  Comment.findByPk(2, {
+  Comment.findByPk(1, {
     include:{
       model: Comment,
       as: 'Children',

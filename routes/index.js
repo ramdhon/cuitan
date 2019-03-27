@@ -9,10 +9,7 @@ router.get('/', (req, res)=>{
 router.get('/get', (req, res)=>{
   User.findByPk(1, {
 
-    include:{
-      model: User,
-      as: 'Follower'
-    }
+    include:['Following','Follower']
   })
 
   .then((users) => res.json(users))

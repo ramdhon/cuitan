@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
 
     // self-reference many:many
-    User.belongsToMany(models.User, {as: 'User', through: 'UserFollow', foreignKey:'UserId'});
+    User.belongsToMany(models.User, {as: 'Following', through: 'UserFollow', foreignKey:'UserId'});
     User.belongsToMany(models.User, {as: 'Follower', through: 'UserFollow', foreignKey:'FollowingId'});
   };
   return User;
