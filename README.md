@@ -7,3 +7,7 @@ Note:
 ```javascript
 npm -i
 ```
+3. Tetap lakukan migrasi setelah install sequelize
+```javascript
+sequelize db:migrate
+```
