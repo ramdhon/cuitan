@@ -5,10 +5,14 @@ module.exports = (sequelize, DataTypes) => {
     last_name: DataTypes.STRING,
     username: DataTypes.STRING,
     password: DataTypes.STRING,
-    bio: DataTypes.STRING
+    bio: DataTypes.TEXT
   }, {});
   User.associate = function(models) {
     // associations can be defined here
+
+     // self-reference many:many
+     User.belongsToMany(models.User, {as: 'Following', through: 'Follow', foreignKey:'UserId'});
+     User.belongsToMany(models.User, {as: 'Follower', through: 'Follow', foreignKey:'FollowingId'});
   };
   return User;
 };
