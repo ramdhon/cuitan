@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/ramdhon/cuitan#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
     "pg": "^7.9.0",
     "sequelize": "^5.2.0"
   }
