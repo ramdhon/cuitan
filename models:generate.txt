@@ -1,0 +1,4 @@
+sequelize model:generate --name User --attributes name:string,email:string &&
+sequelize model:generate --name Cuit --attributes UserId:integer,body:string &&
+sequelize model:generate --name Comment --attributes UserId:integer,CuitId:integer,ParentId:integer,body:text &&
+sequelize model:generate --name UserFollow --attributes UserId:integer,FollowingId:integer

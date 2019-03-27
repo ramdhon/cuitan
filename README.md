@@ -1,2 +1,0 @@
-# cuitan
-cuitan app
