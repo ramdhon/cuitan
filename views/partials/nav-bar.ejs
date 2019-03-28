@@ -2,10 +2,10 @@
 <%let nav2 = 'Sign In'%>
 <%let nav1Url = '/register'%>
 <%let nav2Url = '/login'%>
-<%if (username) {%>
+<%if (locals.username) {%>
   <%nav1 = 'Profile'%>
   <%nav2 = 'Sign Out'%>
-  <%nav1Url = '/profiles'%>
+  <%nav1Url = `/profiles/${username}`%>
   <%nav2Url = '/'%>
 <%}%>
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
