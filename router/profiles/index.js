@@ -1,18 +1,22 @@
-const profiles = require('express').Router();
+const profiles = require('express').Router({ mergeParams: true });
 const Models = require('../../models');
+const updates = require('./updates');
+const followings = require('./followings');
+const followers = require('./followers');
 
 profiles.get('/', (req, res) => {
-  // console.log(req.session.username);
   Models.User.findOne({ 
-    include: [Models.Cuit, 'Following', 'Follower'],
+    include: [{ 
+        model: Models.Cuit,
+        include: [Models.Comment]
+      }, 'Following', 'Follower'],
     where: {
-      username: req.session.username
+      username: req.params.username
     },
     order: [[Models.Cuit, 'createdAt', 'DESC']]
   })
   .then(user => {
-    // console.log(user);
-    let username = req.body.username;
+    let username = req.session.username;
     res.render('../views/profile.ejs', {user, username});
   })
   .catch(error => {
@@ -20,44 +24,11 @@ profiles.get('/', (req, res) => {
   })
 })
 
-profiles.get('/followings', (req, res) => {
-  // console.log(req.session.username);
-  Models.User.findOne({ 
-    include: [Models.Cuit, 'Following', 'Follower'],
-    where: {
-      username: req.session.username
-    },
-    // order: [['Following', 'id', 'DESC']]
-  })
-  .then(user => {
-    res.send(user);
-    // res.render('../views/profile.ejs', user);
-  })
-  .catch(error => {
-    res.send(error);
-  })
-})
+profiles.use('/updates', updates);
 
-profiles.get('/followers', (req, res) => {
-  console.log(req.session.username);
-  Models.User.findOne({ 
-    include: [{
-      model: Models.Cuit,
-    }, 'Following', 'Follower'],
-    where: {
-      username: req.session.username
-    },
-    order: [[Models.Cuit, 'createdAt', 'DESC']]
-  })
-  .then(user => {
-    // res.send(user);
-    user.username = req.session.username;
-    res.render('../views/profile.ejs', user);
-  })
-  .catch(error => {
-    res.send(error);
-  })
-})
+profiles.use('/followings', followings);
+
+profiles.use('/followers', followers);
 
 
 

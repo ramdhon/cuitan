@@ -3,10 +3,11 @@
 <%let nav1Url = '/register'%>
 <%let nav2Url = '/login'%>
 <%let nav3Url = '/'%>
+
 <%if (locals.username) {%>
   <%nav1 = 'Profile'%>
   <%nav2 = 'Sign Out'%>
-  <%nav1Url = '/profiles'%>
+  <%nav1Url = `/profiles/${username}`%>
   <%nav2Url = '/'%>
   <%nav3Url = '/home'%>
 <%}%>
