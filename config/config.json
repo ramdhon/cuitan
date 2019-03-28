@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "postgres",
-    "password": null,
-    "database": "dev-cuit",
+    "password": "qwertyytrewq",
+    "database": "cuit_database",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
