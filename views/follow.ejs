@@ -8,7 +8,7 @@
         margin: 0 20%;
         text-align: center;
       }
-      
+
       .profile {
         text-align: center;
         margin: 0 5%;
@@ -39,7 +39,7 @@
         font-size: 20px;
         color: rgba(0, 0, 0, 0.5);
       }
-      .biodata .bio {
+      .bio {
         font-size: 16px;
         color: rgba(0, 0, 0, 1);
       }
@@ -62,7 +62,7 @@
     <div class="profile">
       <div class="inline">
         <div class="profPict">
-          <span></span>
+            <!-- <img src="/images/avatar.png" class=" img-fluid" alt="..." style="width: 90%; border-radius:50%; margin-right: 10px"> -->
         </div><div class="biodata">
           <span><%=`${user.first_name} ${user.last_name}`%></span>
           <br><span class="username">@<%=user.username%></span>
@@ -78,10 +78,10 @@
       </div>
     </div>
     <div class="containerCuit">
-      <%if (user.Following.length === 0) {%>
+      <%if (user[path].length === 0) {%>
         <span class="username"><%=`${user.first_name} ${user.last_name}`%> currently not following anyone yet.</span>
       <%}%>
-      <%for (let key of user.Following) {%>
+      <%for (let key of user[path]) {%>
         <div class="list">
           <h4><%=`${key.first_name} ${key.last_name}`%></h4>
         </div>
