@@ -30,6 +30,53 @@ profiles.use('/followings', followings);
 
 profiles.use('/followers', followers);
 
+profiles.post('/follow/:idFollow/:cond', (req, res) => {
+  if (req.params.cond === 'follow') {
+    Models.User.findOne({
+      where: {
+        username: req.session.username
+      }
+    })
+    .then(user => {
+      // res.send(req.body.idFollow);
+      return Models.Follow.create({
+        UserId: user.id,
+        FollowingId: req.params.idFollow
+      })
+    })
+    .then(() => {
+      res.redirect(`/profiles/${req.params.username}`);
+    })
+    .catch(err => {
+      res.send(err);
+    })
+  } else if (req.params.cond === 'following') {
+    Models.User.findOne({
+      where: {
+        username: req.session.username
+      }
+    })
+    .then(user => {
+      // res.send(req.params.idFollow)
+      return Models.Follow.destroy({
+        where: {
+          UserId: user.id,
+          FollowingId: req.params.idFollow
+        }
+      })
+    })
+    .then(() => {
+      res.redirect(`/profiles/${req.params.username}`);
+    })
+    .catch(err => {
+      res.send(err);
+    })
+  } else {
+    res.send('not found');
+  }
+})
+
+
 
 
 module.exports = profiles;

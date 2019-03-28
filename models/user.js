@@ -31,5 +31,9 @@ module.exports = (sequelize, DataTypes) => {
     return `Hi, i'm ${this.username}`
   }
 
+  User.prototype.getFullName = function() {
+    return `${this.first_name} ${this.last_name}`
+  }
+
   return User;
 };
