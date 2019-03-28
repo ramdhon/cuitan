@@ -14,8 +14,10 @@ router.get('/', (req, res) => {
   res.render('../views', user);
 })
 
-router.use('/profiles', profiles);
 router.use('/login', login);
 router.use('/register', register);
+
+
+router.use('/profiles/:username', profiles);
 
 module.exports = router;
