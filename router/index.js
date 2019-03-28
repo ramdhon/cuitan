@@ -1,23 +1,19 @@
 const router = require('express').Router();
 const profiles = require('./profiles');
-
 const login = require('./login');
 const register = require('./register');
+const home = require('./home');
+
 
 
 router.get('/', (req, res) => {
-  req.session.username = "ramdhon" ;
-  console.log(req.session);
-  let user = {
-    username: req.session.username
-  }
-  res.render('../views', user);
+  let username = req.session.username
+  res.render('index', {username});
 })
 
 router.use('/login', login);
 router.use('/register', register);
-
-
+router.use('/home', home);
 router.use('/profiles/:username', profiles);
 
 module.exports = router;
