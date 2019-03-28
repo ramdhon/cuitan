@@ -4,7 +4,7 @@ const {Cuit, User, Comment} = require('../../models');
 const Op = require('../../models').Sequelize.Op
 
 home.get('/', (req, res, next) => {
-  req.session.username = "ramdhon"
+  req.session.username = ""
   if (req.session.username ) {
     next()
   } else {
@@ -21,6 +21,7 @@ home.get('/', (req, res, next) => {
     include: ['Following']
   })
   .then((joined)=> {
+      
      joined.Following.forEach((following) => {
        ids.push(following.id)
      })
@@ -39,7 +40,7 @@ home.get('/', (req, res, next) => {
     // res.json(cuits)
     })
   })
-  .catch((error) => res.render('home') )
+  .catch((error) => res.send(error) )
 
 })
 
