@@ -2,7 +2,8 @@ const register = require('express').Router();
 const models = require('../../models');
 
 register.get('/', (req, res) => {
-  res.render('../views/register.ejs');
+  let error = req.query.error
+  res.render('../views/register.ejs', {error});
 })
 
 register.post('/', (req, res) => {
@@ -10,11 +11,10 @@ register.post('/', (req, res) => {
   models.User.create(req.body)
   .then(() => {
     req.session.username = req.body.username;
-    res.redirect('/home')
+    let success ='Welcome to your home page, use the search bar above to connect with others'
+    res.redirect(`/home/?success=${success}`)
   })
-  .catch(err => {
-    res.send(err.message);
-  })
+  .catch((error) => res.redirect(`/register/?error=${error}`))
 })
 
 

@@ -3,10 +3,49 @@ const bcrypt = require('bcryptjs');
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    first_name: DataTypes.STRING,
-    last_name: DataTypes.STRING,
-    username: DataTypes.STRING,
-    password: DataTypes.STRING,
+    first_name: {
+      type: DataTypes.STRING,
+      validate: {
+        isAlpha: {
+          args: true,
+          msg: 'Nama tidak boleh angka'
+        }
+      }
+    },
+    last_name: {
+      type: DataTypes.STRING,
+      validate: {
+        isAlpha: {
+          args:true,
+          msg: 'Nama tidak boleh angka'
+        }
+      }
+    },
+    username:{ 
+     type: DataTypes.STRING,
+     validate: {
+       len: {
+         args: [3,16],
+         msg: 'Username minimum 3 karakter, maksimum 16 karakter'
+       },
+       isUnique(value){
+         return User.findOne({where: {username: value}})
+         .then((user)=>{
+           if(user){  throw new Error('Sudah ada user dengan username tersebut') }
+        })
+       }
+     }
+    },
+    password: {
+      type: DataTypes.STRING,
+      validate: {
+        passwordLength(value) {
+          if(value.length < 8) {
+            throw new Error('Password minimal 8 karakter')
+          }
+        }
+      }
+    },
     bio: DataTypes.TEXT
   }, {
     hooks: {

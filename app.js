@@ -1,9 +1,14 @@
 const express = require('express') ;
-const app = express();
-const PORT = 3000;
 const router = require('./router');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+
+const app = express();
+const PORT = 3000;
+
+const parseErrorMessage = require('./helpers/parseErrorMessage');
+
+app.locals.parseErrorMessage = parseErrorMessage;
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
