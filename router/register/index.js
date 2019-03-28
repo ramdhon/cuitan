@@ -10,7 +10,7 @@ register.post('/', (req, res) => {
   models.User.create(req.body)
   .then(() => {
     req.session.username = req.body.username;
-    res.redirect('/profiles')
+    res.redirect('/home')
   })
   .catch(err => {
     res.send(err.message);
