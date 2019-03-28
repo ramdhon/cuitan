@@ -1,23 +1,26 @@
-<!DOCTYPE html>
-  <head>
-    <title>
-      Cuitan - Welcome
-    </title>
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-    <style>
-      <%-include('../partials/body.ejs');%>
-      <%-include('../partials/nav-bar_style.ejs');%>
-
-      .head {
-        text-align: center;
-        color: rgb(68, 68, 68);
-      }
-    </style>
-  </head>
-  <body>
-    <%-include('../partials/nav-bar.ejs');%>
-    <div class='head'>
-      <h1>Feel free to cuiiit ;)</h1>
+<%- include('./partials/_header.ejs') %>
+   <section id="user">
+    <div style="width: auto; margin: 10px auto; text-align:center; padding: 10px;">
+      <form method="POST" action="">
+      <textarea maxlength="255" name="body" wrap="hard" cols="80px", rows="8px" placeholder="cuit" style="resize: none">
+      </textarea>
+      
+      <input type="submit" value="CUIT">
+      </form>
     </div>
-  </body>
-</html>
+   </section>
+
+   <section id="cuit-container">
+     <div style="margin: 0 auto">
+     <%  cuits.forEach((cuit) => { %>
+        <div style="border:1px solid black; margin:10px auto; padding: 10px; width: 50%; ">
+            <p style="text-align:center; margin:0 auto;"><%= cuit.body %></p>  <span>by <%= `${cuit.User.first_name} ${cuit.User.last_name}`  %> </span>
+            <br><br>
+            <a href="#">Comment</a> 
+        </div>
+         
+      <% }) %>
+     </div> 
+   </section>
+
+<%- include('./partials/_footer.ejs') %>
