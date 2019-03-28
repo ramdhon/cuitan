@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+  <head>
+    <title>
+      Cuitan - Welcome
+    </title>
+    <style>
+      <%-include('../partials/body.ejs');%>
+      <%-include('../partials/nav-bar_style.ejs');%>
+
+      .container {
+        margin: 0 20%;
+      }
+      .profile {
+        text-align: center;
+        margin: 0 5%;
+        padding: 40px;
+        font-size: 24px;
+      }
+
+      .inline {
+        width: 50%;
+        display: inline-block;
+        border: 1px solid black;
+        box-sizing: border-box;
+      }
+
+      .profPict, .biodata {
+        display: inline-block;
+        /* border: 1px solid black; */
+        box-sizing: border-box;
+      }
+      .profPict {
+        width: 30%;
+      }
+      .biodata {
+        width: 70%;
+        text-align: left;
+      }
+      .biodata .username {
+        font-size: 20px;
+        color: rgba(0, 0, 0, 0.5);
+      }
+      .biodata .bio {
+        font-size: 16px;
+        color: rgba(0, 0, 0, 1);
+      }
+
+      .cuit {
+        padding: 0 25px;
+        margin: 10px 0;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        box-sizing: border-box;
+      }
+      .cuit p {
+        margin-left: 20px;
+      }
+
+      .form .input, .button {
+        padding: 4px;
+      }
+      .form .input {
+        width: 80%;
+      }
+    </style>
+  </head>
+  <body>
+    <%-include('../partials/nav-bar.ejs');%>
+    <div class="profile">
+      <div class="inline">
+        <div class="profPict">
+          <span>disini akan<br>ada gambar</span>
+        </div><div class="biodata">
+          <span><%=`${dataValues.first_name} ${dataValues.last_name}`%></span>
+          <br><span class="username">@<%=dataValues.username%></span>
+          <br><span class="bio">Bio:</span>
+          <br><span class="bio"><%=dataValues.bio%></span>
+        </div>
+      </div><div class="inline" class="follow">
+        <span><%=dataValues.Following.length%> Followings</span>
+        <br><span><%=dataValues.Follower.length%> Followers</span>
+      </div>
+    </div>
+    <div class="container">
+      <%for (let cuit of dataValues.Cuits) {%>
+        <div class="cuit">
+          <h3><%=`${dataValues.first_name} ${dataValues.first_name}`%></h3>
+          <p><%=cuit.body%></p>
+          <div class="form">
+            <form class="form" action="/profiles" method="POST">
+              <input class="input" type="text" name="commentBody" placeholder="write comment...">
+              <input class="button" type="submit" value="comment">
+            </form>
+          </div>
+
+        </div>
+      <%}%>
+    </div>
+  </body>
+</html>
