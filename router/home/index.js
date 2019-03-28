@@ -4,14 +4,12 @@ const {Cuit, User, Comment} = require('../../models');
 const Op = require('../../models').Sequelize.Op
 
 home.get('/', (req, res, next) => {
-  req.session.username = ""
   if (req.session.username ) {
     next()
   } else {
     res.redirect('/')
   }
 },(req, res) => {
-  // req.session.username = "jadont" ;
   let username = req.session.username;
   let cuits = [];
   let ids= [];
@@ -37,15 +35,12 @@ home.get('/', (req, res, next) => {
      })
     .then((cuits) =>{
      res.render('home', {cuits, username})
-    // res.json(cuits)
     })
   })
   .catch((error) => res.send(error) )
-
 })
 
 home.post('/', (req, res) => {
-  // req.session.username = "ramdhon";
   let {body} = req.body
   User.findOne({where:{
     username : req.session.username

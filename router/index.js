@@ -11,6 +11,12 @@ router.get('/', (req, res) => {
   res.render('index', {username});
 })
 
+
+router.get('/signout', (req, res) => {
+  req.session.username = null;
+  res.redirect('/');
+})
+
 router.use('/login', login);
 router.use('/register', register);
 router.use('/home', home);
