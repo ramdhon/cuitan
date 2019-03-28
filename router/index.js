@@ -6,9 +6,12 @@ const register = require('./register');
 
 
 router.get('/', (req, res) => {
-  // req.session.username = 'ramdhon';
-  // console.log(req.session);
-  res.render('../views');
+  req.session.username = "ramdhon" ;
+  console.log(req.session);
+  let user = {
+    username: req.session.username
+  }
+  res.render('../views', user);
 })
 
 router.use('/profiles', profiles);

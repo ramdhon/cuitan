@@ -1,9 +1,13 @@
-<div class="nav">
-  <ul>
-    <li>Home</li>
-    <li><a href="/profiles">Profile</a></li>
-  </ul>
-</div>
+<%let nav1 = 'Sign Up'%>
+<%let nav2 = 'Sign In'%>
+<%let nav1Url = '/register'%>
+<%let nav2Url = '/login'%>
+<%if (username) {%>
+  <%nav1 = 'Profile'%>
+  <%nav2 = 'Sign Out'%>
+  <%nav1Url = '/profiles'%>
+  <%nav2Url = '/'%>
+<%}%>
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
   <a class="navbar-brand" href="/">Cuit</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,10 +16,10 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="nav navbar-nav ml-auto" >
       <li class="nav-item">
-        <a class="nav-link" href="/register">Home</a>
+        <a class="nav-link" href="<%=nav1Url%>"><%=nav1%></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/profiles">Profile</a>
+        <a class="nav-link" href="<%=nav2Url%>"><%=nav2%></a>
       </li>
     </ul>
   </div>

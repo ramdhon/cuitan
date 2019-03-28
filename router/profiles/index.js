@@ -11,8 +11,9 @@ profiles.get('/', (req, res) => {
     order: [[Models.Cuit, 'createdAt', 'DESC']]
   })
   .then(user => {
-    // res.send(user);
-    res.render('../views/profile.ejs', user);
+    // console.log(user);
+    let username = req.body.username;
+    res.render('../views/profile.ejs', {user, username});
   })
   .catch(error => {
     res.send(error);
@@ -50,6 +51,7 @@ profiles.get('/followers', (req, res) => {
   })
   .then(user => {
     // res.send(user);
+    user.username = req.session.username;
     res.render('../views/profile.ejs', user);
   })
   .catch(error => {

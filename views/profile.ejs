@@ -1,12 +1,9 @@
 <!DOCTYPE html>
   <head>
-    <title>
-      Cuitan - Welcome
-    </title>
+    <%-include('./partials/_headDefault.ejs');%>
+    <link rel="stylesheet" type="text/css" href="./stylesheets/body.css">
+    <title>Cuitan - Profile</title>
     <style>
-      <%-include('../partials/body.ejs');%>
-      <%-include('../partials/nav-bar_style.ejs');%>
-
       .container {
         margin: 0 20%;
       }
@@ -65,26 +62,26 @@
     </style>
   </head>
   <body>
-    <%-include('../partials/nav-bar.ejs');%>
+    <%-include('./partials/nav-bar.ejs');%>
     <div class="profile">
       <div class="inline">
         <div class="profPict">
           <span>disini akan<br>ada gambar</span>
         </div><div class="biodata">
-          <span><%=`${dataValues.first_name} ${dataValues.last_name}`%></span>
-          <br><span class="username">@<%=dataValues.username%></span>
+          <span><%=`${user.first_name} ${user.last_name}`%></span>
+          <br><span class="username">@<%=user.username%></span>
           <br><span class="bio">Bio:</span>
-          <br><span class="bio"><%=dataValues.bio%></span>
+          <br><span class="bio"><%=user.bio%></span>
         </div>
       </div><div class="inline" class="follow">
-        <span><%=dataValues.Following.length%> Followings</span>
-        <br><span><%=dataValues.Follower.length%> Followers</span>
+        <span><%=user.Following.length%> Followings</span>
+        <br><span><%=user.Follower.length%> Followers</span>
       </div>
     </div>
     <div class="container">
-      <%for (let cuit of dataValues.Cuits) {%>
+      <%for (let cuit of user.Cuits) {%>
         <div class="cuit">
-          <h3><%=`${dataValues.first_name} ${dataValues.first_name}`%></h3>
+          <h3><%=`${user.first_name} ${user.first_name}`%></h3>
           <p><%=cuit.body%></p>
           <div class="form">
             <form class="form" action="/profiles" method="POST">
