@@ -4,7 +4,7 @@ const {Cuit, User, Comment} = require('../../models');
 const Op = require('../../models').Sequelize.Op
 
 home.get('/', (req, res, next) => {
-  req.session.username = "jadont"
+  req.session.username = "ramdhon"
   if (req.session.username ) {
     next()
   } else {
@@ -24,13 +24,15 @@ home.get('/', (req, res, next) => {
      joined.Following.forEach((following) => {
        ids.push(following.id)
      })
+     ids.push(joined.id);
      return Cuit.findAll({
        include: User,
        where:{
          UserId:{
            [Op.in] : ids
          }
-       }
+       },
+       order:[['createdAt', 'DESC']]
      })
     .then((cuits) =>{
      res.render('home', {cuits, username})
@@ -42,7 +44,7 @@ home.get('/', (req, res, next) => {
 })
 
 home.post('/', (req, res) => {
-  // req.session.username = "jadont";
+  // req.session.username = "ramdhon";
   let {body} = req.body
   User.findOne({where:{
     username : req.session.username
@@ -53,7 +55,7 @@ home.post('/', (req, res) => {
     return Cuit.create(obj)
   })
   .then(_=> {
-    res.redirect('/')
+    res.redirect('/home')
   })
   .catch((error) => res.send(error));
  
