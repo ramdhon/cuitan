@@ -5,12 +5,10 @@ const register = require('./register');
 const home = require('./home');
 
 
-
 router.get('/', (req, res) => {
   let username = req.session.username
   res.render('index', {username});
 })
-
 
 router.get('/signout', (req, res) => {
   req.session.username = null;

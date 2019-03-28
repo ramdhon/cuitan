@@ -54,7 +54,11 @@ home.post('/', (req, res) => {
     res.redirect('/home')
   })
   .catch((error) => res.send(error));
- 
+})
+
+home.post('/search', (req, res) => {
+  let {username} = req.body
+  res.redirect(`/profiles/${username}`);
 })
 
 module.exports = home;
