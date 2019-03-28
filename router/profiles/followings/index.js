@@ -15,7 +15,7 @@ followings.get('/', (req, res) => {
   .then(user => {
     let username = req.session.username;
     let path = 'Following'
-    res.render('follow', {user, username, path});
+    res.render('profile', {user, username, path});
   })
   .catch(error => {
     res.send(error);
