@@ -4,12 +4,14 @@ const {Cuit, User, Comment} = require('../../models');
 const Op = require('../../models').Sequelize.Op
 
 home.get('/', (req, res, next) => {
+
   if (req.session.username ) {
     next()
   } else {
     res.redirect('/')
   }
 },(req, res) => {
+  let success = req.query.success;
   let username = req.session.username;
   let cuits = [];
   let ids= [];
@@ -34,7 +36,7 @@ home.get('/', (req, res, next) => {
        order:[['createdAt', 'DESC']]
      })
     .then((cuits) =>{
-     res.render('home', {cuits, username})
+     res.render('home', {cuits, username, success})
     })
   })
   .catch((error) => res.send(error) )
