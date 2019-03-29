@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%-include('./partials/_headDefault.ejs');%>
+    <title>CUITAN</title>
+  </head>
+
+  <body>
+    <%-include('./partials/nav-bar.ejs');%>
+
+ <div class="jumbotron">
+    <h1 class="display-4 text-center" >Error 404</h1>
+    <p class="lead text-center">Error Found</p>
+    <hr class="my-4">
+    <p class="text-center"><%=error.message%></p>
+    <%if (!locals.username) {%>
+      <div class="text-center">
+        <a class="btn btn-primary btn-lg" href="/register" role="button">Cuit Up</a>
+      </div>
+    <%}%>
+  </div>
+
+  <%- include('./partials/_footer.ejs') %>

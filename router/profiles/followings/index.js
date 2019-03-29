@@ -15,11 +15,18 @@ followings.get('/', (req, res) => {
   .then(user => {
     let username = req.session.username;
     let path = 'Following'
-    res.render('profile', {user, username, path});
+    res.render('follow', {user, username, path});
   })
   .catch(error => {
-    res.send(error);
+    let username = req.session.username;
+    res.render('error', { error, username })
   })
+})
+
+followings.get('/:error', (req, res) => {
+  let username = req.session.username;
+  let error = new Error ('not found');
+  res.render('error', { error, username })
 })
 
 module.exports = followings;
