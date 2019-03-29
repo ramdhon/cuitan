@@ -27,5 +27,10 @@ login.post('/', (req, res) => {
   });
 })
 
+login.get('/:error', (req, res) => {
+  let username = req.session.username;
+  let error = new Error ('not found');
+  res.render('error', { error, username })
+})
 
 module.exports = login;
