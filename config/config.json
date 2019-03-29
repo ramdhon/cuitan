@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "qwertyytrewq",
+    "database": "cuit_database",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "hnqwlvupylazzd",
+    "password": "b191693274fa40a33bd6213cbfbc81030aafad2f2b467dfc281bd71f97165584",
+    "database": "dc1rq7ahl39psg",
+    "host": "ec2-23-23-241-119.compute-1.amazonaws.com",
+    "dialect": "postgres"
+  }
+}
