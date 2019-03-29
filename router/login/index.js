@@ -15,12 +15,20 @@ login.post('/', (req, res) => {
       req.session.username = username;
       res.redirect('/home');
     } else {
-      throw new Error('user/password salah')
+      throw new Error('user/password invalid')
     }
 
   })
-  .catch((error) => res.send(error));
+  .catch((error) => {
+    let username = req.session.username;
+    res.render('error', { error, username })
+  });
 })
 
+login.get('/:error', (req, res) => {
+  let username = req.session.username;
+  let error = new Error ('not found');
+  res.render('error', { error, username })
+})
 
 module.exports = login;

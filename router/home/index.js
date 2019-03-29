@@ -39,7 +39,10 @@ home.get('/', (req, res, next) => {
      res.render('home', {cuits, username, success})
     })
   })
-  .catch((error) => res.send(error) )
+  .catch((error) => {
+    username = req.session.username;
+    res.render('error', { error, username })
+  } )
 })
 
 home.post('/', (req, res) => {
@@ -55,12 +58,21 @@ home.post('/', (req, res) => {
   .then(_=> {
     res.redirect('/home')
   })
-  .catch((error) => res.send(error));
+  .catch((error) => {
+    let username = req.session.username;
+    res.render('error', { error, username })
+  });
 })
 
 home.post('/search', (req, res) => {
   let {username} = req.body
   res.redirect(`/profiles/${username}`);
+})
+
+home.get('/:error', (req, res) => {
+  let username = req.session.username;
+  let error = new Error ('not found');
+  res.render('error', { error, username })
 })
 
 module.exports = home;

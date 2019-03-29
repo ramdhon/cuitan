@@ -16,11 +16,18 @@ profiles.get('/', (req, res) => {
     order: [[Models.Cuit, 'createdAt', 'DESC']]
   })
   .then(user => {
-    let username = req.session.username;
-    res.render('../views/profile.ejs', {user, username});
+    if (user) {
+      let username = req.session.username;
+      res.render('../views/profile.ejs', {user, username});
+    } else {
+      let username = req.session.username;
+      let error = new Error ('person you are looking for is not found :)')
+      res.render('error', { error, username })  
+    }
   })
   .catch(error => {
-    res.send(error);
+    let username = req.session.username;
+    res.render('error', { error, username })
   })
 })
 
@@ -47,8 +54,9 @@ profiles.post('/follow/:idFollow/:cond', (req, res) => {
     .then(() => {
       res.redirect(`/profiles/${req.params.username}`);
     })
-    .catch(err => {
-      res.send(err);
+    .catch(error => {
+      let username = req.session.username;
+      res.render('error', { error, username });
     })
   } else if (req.params.cond === 'following') {
     Models.User.findOne({
@@ -68,15 +76,21 @@ profiles.post('/follow/:idFollow/:cond', (req, res) => {
     .then(() => {
       res.redirect(`/profiles/${req.params.username}`);
     })
-    .catch(err => {
-      res.send(err);
+    .catch(error => {
+      let username = req.session.username;
+      res.render('error', { error, username })
     })
   } else {
-    res.send('not found');
+    let username = req.session.username;
+    let error = new Error ('not found')
+    res.render('error', { error, username })
   }
 })
 
-
-
+profiles.get('/:error', (req, res) => {
+  let username = req.session.username;
+  let error = new Error ('not found');
+  res.render('error', { error, username })
+})
 
 module.exports = profiles;

@@ -12,7 +12,8 @@ updates.get('/', (req, res) => {
     res.render('update', { user, username });
   })
   .catch(err => {
-    res.send(err);
+    let username = req.session.username;
+    res.render('error', { error, username })
   })
 })
 
@@ -30,8 +31,15 @@ updates.post('/', (req, res) => {
     res.redirect(`/profiles/${username}`);
   })
   .catch(err => {
-    res.send(err);
+    let username = req.session.username;
+    res.render('error', { error, username })
   })
+})
+
+updates.get('/:error', (req, res) => {
+  let username = req.session.username;
+  let error = new Error ('not found');
+  res.render('error', { error, username })
 })
 
 module.exports = updates;
