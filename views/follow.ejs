@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+  <head>
+    <%-include('./partials/_headDefault.ejs');%>
+    <link rel="stylesheet" type="text/css" href="./stylesheets/body.css">
+    <title>Cuitan - Profile</title>
+    <style>
+      .containerFollow {
+        margin: 0 20%;
+        text-align: center;
+      }
+
+      .profile {
+        text-align: center;
+        margin: 0 5%;
+        padding: 40px;
+        font-size: 24px;
+      }
+
+      .inline {
+        width: 50%;
+        display: inline-block;
+        /* border: 1px solid black; */
+        box-sizing: border-box;
+      }
+
+      .profPict, .biodata {
+        display: inline-block;
+        /* border: 1px solid black; */
+        box-sizing: border-box;
+      }
+      .profPict {
+        width: 30%;
+      }
+      .biodata {
+        width: 70%;
+        text-align: left;
+      }
+      .username {
+        font-size: 20px;
+        color: rgba(0, 0, 0, 0.5);
+      }
+      .bio {
+        font-size: 16px;
+        color: rgba(0, 0, 0, 1);
+      }
+
+      .list {
+        text-align: left;
+        padding: 10px 25px;
+        margin: 10px 0;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        box-sizing: border-box;
+      }
+      .list h6 {
+        margin-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <%-include('./partials/nav-bar.ejs');%>
+    <div class="profile">
+      <div class="inline">
+        <div class="profPict">
+            <img src="/images/avatar.png" class=" img-fluid" alt="..." style="width: 90%; border-radius:50%; margin-right: 10px">
+        </div><div class="biodata">
+          <span><%=user.getFullName()%></span>
+          <br><span class="username">@<%=user.username%></span>
+          <%if(username === user.username) {%>
+            <br><a href="/profiles/<%=username%>/updates"><button type="submit" class="btn btn-primary">Update profile</button></a>
+          <%}%>
+          <br><span class="bio">Bio:</span>
+          <br><span class="bio"><%=user.bio%></span>
+        </div>
+      </div><div class="inline" class="follow">
+        <%if(locals.username) {%>
+          <%if(username !== user.username) {%>
+            <%let follow = 'follow';%>
+            <%let btn = 'primary'%>
+            <%if(user.Follower.find(key => key.username === username)) {%>
+              <%follow = 'following';%>
+              <%btn = 'light'%>
+            <%}%>
+            <br><form action="/profiles/<%=user.username%>/follow/<%=user.id%>/<%=follow%>" method="POST">
+              <button type="submit" name="idFollow" value="<%=user.id%>" class="btn btn-<%=btn%>"><%=follow%></button>
+            </form>
+          <%}%>
+        <%}%>
+        <span><a href="/profiles/<%=user.username%>/followings"><%=user.Following.length%> Followings</a></span>
+        <br><span><a href="/profiles/<%=user.username%>/followers"><%=user.Follower.length%> Followers</a></span>
+      </div>
+    </div>
+    <div class="containerFollow">
+      <%if (user[path].length === 0) {%>
+        <span class="username"><%=user.getFullName()%> currently not <%=path==='Following'?'following':'followed by'%> anyone yet.</span>
+      <%}%>
+      <%for (let key of user[path]) {%>
+        <div class="list">
+          <h4><%=key.getFullName()%></h4>
+        </div>
+      <%}%>
+    </div>
+  </body>
+</html>

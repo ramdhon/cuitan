@@ -1,0 +1,29 @@
+{
+  "name": "cuitan",
+  "version": "1.0.0",
+  "description": "cuitan app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ramdhon/cuitan.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ramdhon/cuitan/issues"
+  },
+  "homepage": "https://github.com/ramdhon/cuitan#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "pg": "^7.9.0",
+    "sequelize": "^5.2.0"
+  }
+}

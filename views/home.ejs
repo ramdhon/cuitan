@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%-include('./partials/_headDefault.ejs');%>
+    <title>CUITAN</title>
+  </head>
+
+  <body>
+    <% if (locals.username) %>
+    <%-include('./partials/nav-bar.ejs');%>
+    <%-include('./partials/_alert.ejs');%>
+    <form method="POST" action="" style="width: 60%; margin: 10px auto; ">
+      <div class="form-group">
+          <label for="comment"><%=locals.username%>, Cuit the world what you think: </label>
+          <textarea class="form-control" rows="5" name="body"></textarea>
+          <br>
+          <input class="btn btn-primary" type="submit" value="Cuit">
+        </div>
+    </form>
+
+      <% cuits.forEach((cuit) => { %>
+        <div class="media border" style="margin: 25px auto; width: 60%; height: 200px; padding:20px;" >
+            <img src="/images/avatar.png" class=" img-fluid" alt="..." style="width: 50px; border-radius:50%; margin-right: 10px">
+            <div class="media-body">
+              <h5 class="mt-0" style="margin-left: 10px ;"> <a href="/profiles/<%= cuit.User.username %>"><%= cuit.User.first_name + ' ' + cuit.User.last_name %></a></h5>
+              <hr>
+              <div style="margin: 10px; padding: 5px"><%= cuit.body%></div>
+            </div>
+          </div>
+      <% }) %>
+<%- include('./partials/_footer.ejs') %>
+
+
+
+
+
+
