@@ -3,6 +3,7 @@ const models = require('../../models');
 
 register.get('/', (req, res) => {
   let error = req.query.error
+  console.log(error)
   res.render('../views/register.ejs', {error});
 })
 
