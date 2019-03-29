@@ -1,7 +1,11 @@
 module.exports = (message) => {
   let arr = message.split('\n');
   let msg = arr.map((v=> v.split(':')[1]));
-  msg[0] = arr[0].split(':')[2];
+
+  if(arr[0].split(':').length <= 2) {
+    msg[0] = arr[0].split(':')[1]
+  } else {
+    msg[0] = arr[0].split(':')[2] }
 
   return msg
   
