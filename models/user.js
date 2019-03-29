@@ -27,12 +27,6 @@ module.exports = (sequelize, DataTypes) => {
        len: {
          args: [3,16],
          msg: 'Username minimum 3 karakter, maksimum 16 karakter'
-       },
-       isUnique(value){
-         return User.findOne({where: {username: value}})
-         .then((user)=>{
-           if(user){  throw new Error('Sudah ada user dengan username tersebut') }
-        })
        }
      }
     },
